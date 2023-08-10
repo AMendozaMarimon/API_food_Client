@@ -1,0 +1,50 @@
+.recipeList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 60px;
+  padding-bottom: 60px; 
+  list-style-type: none; 
+  padding: 0; 
+  margin: 0; 
+  text-decoration: none;
+}
+
+.containerPrevNext {
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  gap: 460px;
+}
+
+.button {
+  margin-left: 30PX;
+  margin-right: 30px;
+  margin-bottom: 1%;
+  padding: 10px 15px;
+  font-family: 'League Spartan', sans-serif;    
+  font-size: 15px;
+  background-color: transparent;
+  border: 2px solid #FBC030;
+  transition: background-color 0.4s, transform 0.4s;
+  transform: scale(1);
+}
+
+.button:hover,
+.button:focus {
+  background-color: #FBC030;
+  color: white;
+  transform: scale(1.1);
+}
+
+.containerLoading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+  }
+
+.loading {
+    height: 80px;
+    width: auto;
+}

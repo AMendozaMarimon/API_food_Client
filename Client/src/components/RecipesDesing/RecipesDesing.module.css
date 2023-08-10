@@ -1,0 +1,46 @@
+.divRecipes {
+  display: flex;
+  align-items: flex-start;
+  background-color: #292930;
+  width: 650px;
+  height: 300px;
+  margin: 20px;
+  animation: floatAnimation 3s infinite ease-in-out;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  position: relative;
+  text-decoration: none;
+}
+
+.divRecipes:hover {
+  transform: scale(1.05);
+}
+
+.title {
+  color: white;
+  font-family: 'League Spartan', sans-serif;
+  font-size: 35px;
+  line-height: 37px;
+  margin-left: 40px;
+  margin-top: 27px;
+  margin-right: 70px;
+  margin-bottom: 15px;
+}
+
+.title:hover {
+  color: #FBC030;
+}
+
+.image {
+  margin-left: 30px;
+  margin-top: 35px;
+  width: auto;
+  height: 230px;
+}
+
+.p {
+  font-family: 'League Spartan', sans-serif;
+  font-size: 17px;
+  color: white;
+  margin-left: 40px;
+  padding-right: 50px;
+}

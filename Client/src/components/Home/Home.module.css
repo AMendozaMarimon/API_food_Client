@@ -1,0 +1,56 @@
+.container {
+    display: flex;
+    background-color: #FBC030;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+.title {
+    font-size: 80px;
+    margin-left: 150px;
+    font-family: 'League Spartan', sans-serif;
+}
+
+.starts {
+    font-size: 25px;
+    margin-bottom: 5px;
+    background-color: white;
+    padding: 50px;
+}
+
+.searchContainer {
+    text-align: center;
+}
+
+.search {
+    margin-top: 65px;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 30px;
+    color: #FBC030; 
+    background-color: transparent;
+    border: 3px solid #FBC030;
+    padding: 15px 20px;
+    transition: background-color 0.4s, transform 0.4s; 
+}
+
+.search:hover,
+.search:focus {
+    background-color: #FBC030;
+    color: white;
+    transform: scale(1.1); 
+}
+
+.image {
+    width: 550px;
+    height: auto;
+    background-color: white;
+    padding: 10px;
+    margin-top: 15px;
+    transition: transform 0.3s ease;
+    margin-left: 22%;
+  }
+  
+.image:hover {
+    transform: scale(1.05) rotate(3deg);
+  } 
+

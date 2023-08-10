@@ -1,0 +1,115 @@
+.containerLoading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+}
+
+.loading {
+  margin-top: 400px;
+  height: 80px;
+  width: auto;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+  }
+
+.container p {
+  font-family: 'League Spartan', sans-serif;
+  color: rgb(144, 144, 144);
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+.leftContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 150px;
+  }
+
+.leftContainer h2 {
+    font-family: 'League Spartan', sans-serif;
+    font-size: 50px;
+}
+
+.color {
+    color: #FBC030;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+.formContainer input {
+    margin-top: 7px;
+    margin-bottom: 10px;
+    padding: 0.7rem;
+    width: 400px;
+    border: none;
+    box-shadow: 0 0 0 1px black;
+    outline: none;
+    transition: box-shadow 0.3s;
+}
+
+.formContainer input:focus {
+    box-shadow: 0 0 0 1px #FBC030;
+  }
+
+.selectBox {
+    height: 150px;
+    width: 100px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+  }
+
+.selectOption {
+    padding: 5px;
+  }
+
+.rightContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 250px;
+}
+
+.imageContainer {
+    margin-top:70px;
+    height: 600px;
+    width: auto;
+  }
+
+.select {
+  width: 200px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  position: relative;
+  display: inline-block;
+  font-family: 'League Spartan', sans-serif;
+  color: #8d8b8b;
+}
+
+.button {
+  margin-bottom: 10px;
+  font-family: 'League Spartan', sans-serif;
+  font-size: 20px;
+  color: #FBC030; 
+  background-color: transparent;
+  border: 3px solid #FBC030;
+  padding: 10px 15px;
+  transition: background-color 0.4s, transform 0.4s; 
+}
+
+.button:hover, .button:focus {
+  background-color: #FBC030;
+  color: white;
+  transform: scale(1.1); 
+}
