@@ -23,6 +23,13 @@
   font-size: 13px;
 }
 
+.container h3 {
+  font-family: 'League Spartan', sans-serif;
+  color: rgb(144, 144, 144);
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
 .leftContainer {
     display: flex;
     flex-direction: column;
@@ -45,7 +52,7 @@
     align-items: flex-start;
   }
 
-.formContainer input {
+.formContainerINPUT {
     margin-top: 7px;
     margin-bottom: 10px;
     padding: 0.7rem;
@@ -78,7 +85,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 250px;
+    margin-left: 110px;
 }
 
 .imageContainer {
@@ -112,4 +119,22 @@
   background-color: #FBC030;
   color: white;
   transform: scale(1.1); 
+}
+
+.checkboxContainer {
+  margin-top: 10px;
+  margin-bottom: 40px;
+  width: 600px;
+}
+
+.checkboxLabel {
+  flex-basis: calc(33.33% - 10px);
+  font-family: 'League Spartan', sans-serif;
+  font-size: 14px;
+  color: #8d8b8b;
+}
+
+.checkboxColumns {
+  display: flex;
+  flex-wrap: wrap;
 }

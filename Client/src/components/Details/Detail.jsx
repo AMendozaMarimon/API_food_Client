@@ -45,7 +45,7 @@ export const Detail = () => {
                     <img src={recipe.image} alt={recipe.title} className={style.recipe_image} />
                     <p>{recipe.summary ? recipe.summary.replace(/<[^>]+>/g, "") : ""}</p>
                     <h2>Health Score:</h2>
-                    <p>{recipe.healthScore}</p>
+                    <p>{recipe.healthScore} ✨ </p>
                     <h2>Step by step:</h2>
                     <p>{recipe.stepbystep ? recipe.stepbystep.replace(/<[^>]+>/g, "") : ""}</p>
                     <div className={style.diets}>

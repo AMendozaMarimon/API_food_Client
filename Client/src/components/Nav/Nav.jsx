@@ -3,8 +3,9 @@ import { useLocation } from "react-router-dom";
 import { NavBar } from "./NavBar/NavBar";
 import { Title } from "./Title/Title";
 import { SearchBar } from "./SearchBar/SearchBar";
+import { Filters } from "./Filters/Filters";
 
-export const Nav = (props) => {
+export const Nav = (props) => { 
 
     const { LogOut } = props;
 
@@ -19,6 +20,7 @@ export const Nav = (props) => {
             <NavBar LogOut={LogOut}/>
             <Title />
             <SearchBar />
+            <Filters />
         </nav>
     )
 };

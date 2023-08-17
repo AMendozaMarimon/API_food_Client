@@ -1,27 +1,22 @@
-import axios from "axios";
-import Select from "react-select";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import PHOTO from "../Login/PHOTO_LOGIN.png";
-import GIF from "../RecipesCards/icons8-loading-infinity.gif";
+// import GIF from "../RecipesCards/icons8-loading-infinity.gif";
 import styles from "./CreateRecipe.module.css";
-import { addDiets } from "../../redux/actions";
+import { addDiets, addRecipes } from "../../redux/actions";
 
 export const CreateRecipe = () => {
-
     const navigate = useNavigate();
-    const location = useLocation();
     const dispatch = useDispatch();
     const myDiets = useSelector((state) => state.myDiets);
 
     useEffect(() => {
-        if (location.pathname !== "/create") {
-            return null;
-        } else {
+        if (!myDiets) {
             dispatch(addDiets());
         }
-    }, [location.pathname, dispatch]);
+    }, [dispatch, myDiets]);
 
     const [formData, setFormData] = useState({
         title: "",
@@ -32,18 +27,14 @@ export const CreateRecipe = () => {
         selectedDiets: [],
     });
 
-    if (!myDiets) {
-        return <div className={styles.containerLoading}>
-            <img className={styles.loading} src={GIF} alt="Loading.." />
-        </div>;
-    }
+    console.log(formData.selectedDiets)
 
     const handleChange = (e) => {
         const { name, value } = e.target;
 
         if (name === 'healthScore') {
             if (value < 0 || value > 100) {
-                return; 
+                return;
             }
         }
 
@@ -53,12 +44,20 @@ export const CreateRecipe = () => {
         }));
     };
 
-    const handleSelectChange = (selectedOptions) => {
-        const selectedDiets = selectedOptions.map((option) => option.value);
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            selectedDiets: selectedDiets,
-        }));
+    const handleCheckboxChange = (e) => {
+        const { value, checked } = e.target;
+
+        if (checked) {
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                selectedDiets: [...prevFormData.selectedDiets, value],
+            }));
+        } else {
+            setFormData((prevFormData) => ({
+                ...prevFormData,
+                selectedDiets: prevFormData.selectedDiets.filter((diet) => diet !== value),
+            }));
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -67,15 +66,15 @@ export const CreateRecipe = () => {
             const URL = "http://localhost:3001/recipes";
             const { status } = await axios.post(URL, formData);
             if (status === 200) {
-                alert("Created recept");
+                await dispatch(addRecipes());
+                alert("Recipe created");
                 navigate("/search");
             }
         } catch (error) {
             if (error.response) {
                 const { data, status } = error.response;
-
                 if (status === 400) {
-                    alert(data.message)
+                    alert(data.message);
                 }
             }
         }
@@ -88,7 +87,7 @@ export const CreateRecipe = () => {
                     <span className={styles.color}>Create</span> <br />your recipe!
                 </h2>
                 <form className={styles.formContainer} onSubmit={handleSubmit}>
-                    <input
+                    <input className={styles.formContainerINPUT}
                         type="text"
                         name="title"
                         value={formData.title}
@@ -96,7 +95,7 @@ export const CreateRecipe = () => {
                         placeholder="Enter the name of the recipe..."
                     />
 
-                    <input
+                    <input className={styles.formContainerINPUT}
                         type="text"
                         name="image"
                         value={formData.image}
@@ -104,7 +103,7 @@ export const CreateRecipe = () => {
                         placeholder="Enter the image URL..."
                     />
 
-                    <input
+                    <input className={styles.formContainerINPUT}
                         type="text"
                         name="summary"
                         value={formData.summary}
@@ -112,7 +111,7 @@ export const CreateRecipe = () => {
                         placeholder="Enter the description..."
                     />
 
-                    <input
+                    <input className={styles.formContainerINPUT}
                         type="number"
                         name="healthScore"
                         value={formData.healthScore}
@@ -120,7 +119,7 @@ export const CreateRecipe = () => {
                         placeholder="Enter the health score..."
                     />
 
-                    <input
+                    <input className={styles.formContainerINPUT}
                         type="text"
                         name="step_by_step"
                         value={formData.step_by_step}
@@ -128,20 +127,23 @@ export const CreateRecipe = () => {
                         placeholder="Enter the steps..."
                     />
 
-                    <Select
-                        className={styles.select}
-                        isMulti
-                        name="selectedDiets"
-                        options={myDiets?.map((diet) => ({
-                            value: diet,
-                            label: diet,
-                        }))}
-                        value={formData.selectedDiets.map((diet) => ({
-                            value: diet,
-                            label: diet,
-                        }))}
-                        onChange={handleSelectChange}
-                    />
+                    <div className={styles.checkboxContainer}>
+                        <h3>Select diets:</h3>
+                        <div className={styles.checkboxColumns}>
+                            {myDiets?.map((diet) => (
+                                <label key={diet} className={styles.checkboxLabel}>
+                                    <input
+                                        type="checkbox"
+                                        value={diet}
+                                        checked={formData.selectedDiets.includes(diet)}
+                                        onChange={handleCheckboxChange}
+                                        className={styles.checkboxInput}
+                                    />
+                                    {diet}
+                                </label>
+                            ))}
+                        </div>
+                    </div>
 
                     <button className={styles.button} type="submit">Create Recipe</button>
                 </form>

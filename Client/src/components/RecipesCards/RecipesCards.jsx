@@ -1,10 +1,13 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { RecipesDesing } from "../RecipesDesing/RecipesDesing";
 import ICONO_GIF from "./icons8-loading-infinity.gif";
 import styles from "./RecipesCards.module.css";
+import { addRecipes, applyFilters } from "../../redux/actions";
 
 export const RecipesCards = () => {
+
+  const [recipesLoaded, setRecipesLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const recipesPerPage = 9;
 
@@ -16,9 +19,25 @@ export const RecipesCards = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
 
-  const myRecipes = useSelector((state) => state.myRecipes);
+  const pageFiltereds = useSelector((state) => state.pageFiltered);
+  const dispatch = useDispatch();
 
-  if (!myRecipes || myRecipes.length === 0) {
+  useEffect(() => {
+    if (!recipesLoaded) {
+      const fetchRecipes = async () => {
+        await dispatch(addRecipes());
+        dispatch(applyFilters("myRecipes"));
+        setRecipesLoaded(true);
+      };
+      fetchRecipes();
+    }
+  }, [dispatch, recipesLoaded]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [pageFiltereds]);
+
+  if (!recipesLoaded || !pageFiltereds) {
     return (
       <div className={styles.containerLoading}>
         <img className={styles.loading} src={ICONO_GIF} alt="loading..." />
@@ -28,7 +47,7 @@ export const RecipesCards = () => {
 
   const indexOfLastRecipe = currentPage * recipesPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-  const currentRecipes = myRecipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+  const currentRecipes = pageFiltereds.slice(indexOfFirstRecipe, indexOfLastRecipe);
 
   return (
     <div>
@@ -48,8 +67,9 @@ export const RecipesCards = () => {
               id={recipe.id}
               title={recipe.title}
               image={recipe.image}
+              healthScore={recipe.healthScore}
               diets={recipe.diets}
-              Diets={recipe.Diets}
+              Diets={recipe?.Diets}
             />
           ))}
         </ul>

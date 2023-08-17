@@ -41,7 +41,7 @@ function App() {
       }
     }
   };
-  
+
   const LogOut = () => {
     setAccess(false);
   };

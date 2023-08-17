@@ -1,0 +1,37 @@
+.container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.options {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px;
+    font-family: 'League Spartan', sans-serif;
+    transition: border 0.4s;
+    border: 1px solid transparent;
+  }
+  
+  .options:hover,
+  .options:focus {
+    border: 1px solid #FBC030; 
+  }
+  
+
+.button {
+    padding: 11px;
+    margin-left: 50px;
+    font-family: 'League Spartan', sans-serif;    
+    background-color: transparent;
+    border: 2px solid #FBC030;
+    transition: background-color 0.4s;
+}
+
+.button:hover,
+.button:focus {
+  background-color: #FBC030;
+  color: white;
+}
+
+

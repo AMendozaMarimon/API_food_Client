@@ -4,6 +4,7 @@ import { useState } from "react";
 import styles from "./Login.module.css";
 import validation from "./validation";
 import PHOTO_LOGIN from "./PHOTO_LOGIN.png";
+import validationReg from "./validationReg";
 
 export const Login = (props) => {
 
@@ -20,6 +21,7 @@ export const Login = (props) => {
     });
 
     const [errors, setErrors] = useState({});
+    const [errorsR, setErrorsR] = useState({});
 
     const handleChangeR = (e) => {
         const { name, value } = e.target;
@@ -27,10 +29,11 @@ export const Login = (props) => {
             ...userDataReg,
             [name]: value,
         };
-        const validationError = validation(updatedUserDataReg);
+        const validationError = validationReg(updatedUserDataReg);
         setUserDataReg(updatedUserDataReg);
-        setErrors(validationError);
+        setErrorsR(validationError);
     };
+
 
     const [isSignUp, setIsSignUp] = useState(false);
 
@@ -106,7 +109,7 @@ export const Login = (props) => {
                                 onChange={handleChangeR}
                                 placeholder="Enter you email to register..."
                             />
-                            {errors.email && <p className={styles.p}>{errors.email}</p>}
+                            {errorsR.email && <p className={styles.p}>{errorsR.email}</p>}
                             <label>Password: </label>
                             <input
                                 type="password"
@@ -115,7 +118,7 @@ export const Login = (props) => {
                                 onChange={handleChangeR}
                                 placeholder="Enter your password to register..."
                             />
-                            {errors.password && <p className={styles.p}>{errors.password}</p>}
+                            {errorsR.password && <p className={styles.p}>{errorsR.password}</p>}
                             <button type="submit">Sing up.</button>
                             <p>
                                 <span>Do you already have an account? </span>

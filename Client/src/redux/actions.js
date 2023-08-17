@@ -2,6 +2,12 @@ import axios from "axios";
 export const ADD_RECIPES = "ADD_RECIPES";
 export const QUERY_RECIPES = "QUERY_RECIPES";
 export const ADD_DIETS = "ADD_DIETS";
+export const SORT_ALPHABETICALLY = "SORT_ALPHABETICALLY";
+export const SORT_SCORE_HS = "SORT_SCORE_HS";
+export const FILTER_BY_DIETS = "FILTER_BY_DIETS";
+export const FILTER_BY_BD_API = "FILTER_BY_BD_API";
+export const APPLY_FILTER = "APPLY_FILTER";
+export const DIETS_LOADED = "DIETS_LOADED";
 
 export const addRecipes = () => {
   const enpoind = "http://localhost:3001/recipes";
@@ -50,3 +56,45 @@ export const addDiets = () => {
     }
   };
 };
+
+export const sortAlphabetically = (order) => {
+  return {
+    type: SORT_ALPHABETICALLY,
+    payload: order,
+  };
+};
+
+export const sortScortHS = (order) => {
+  return {
+    type: SORT_SCORE_HS,
+    payload: order,
+  };
+};
+
+export const filterByDiets = (selectedDiet) => {
+  return {
+    type: FILTER_BY_DIETS,
+    payload: selectedDiet,
+  }
+};
+
+export const filterByBDorAPI = (origin) => {
+  return {
+    type: FILTER_BY_BD_API,
+    payload: origin,
+  };
+};
+
+export const applyFilters = (filter) => {
+  return {
+    type: APPLY_FILTER,
+    payload: filter,
+  }
+};
+
+export const dietLoaded = () => {
+  return {
+    type: DIETS_LOADED,
+    payload: true,
+  }
+}
