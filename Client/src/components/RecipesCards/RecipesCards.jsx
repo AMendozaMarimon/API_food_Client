@@ -1,19 +1,20 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RecipesDesing } from "../RecipesDesing/RecipesDesing";
+import { addRecipes, applyFilters } from "../../redux/actions";
 import ICONO_GIF from "./icons8-loading-infinity.gif";
 import styles from "./RecipesCards.module.css";
-import { addRecipes, applyFilters } from "../../redux/actions";
+import NotFound from "./NotFound.svg";
+import { RecipesDesing } from "../RecipesDesing/RecipesDesing";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 export const RecipesCards = () => {
 
   const [recipesLoaded, setRecipesLoaded] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const recipesPerPage = 9;
+  const [currentPage, setCurrentPage] = useState(1); //PÁGINAS
+  const recipesPerPage = 9; //RECETAS POR PÁGINAS
 
   const nextHandle = () => {
     setCurrentPage((prevPage) => prevPage + 1);
-  };
+  };  
 
   const prevHandle = () => {
     setCurrentPage((prevPage) => prevPage - 1);
@@ -45,10 +46,19 @@ export const RecipesCards = () => {
     );
   }
 
-  const indexOfLastRecipe = currentPage * recipesPerPage;
-  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-  const currentRecipes = pageFiltereds.slice(indexOfFirstRecipe, indexOfLastRecipe);
+  if (pageFiltereds.length === 0) {
+    return (
+      <div className={styles.containerNF}>
+        <img className={styles.NFimg} src={NotFound} alt="NotFound..." />
+        <p className={styles.NFp}>Not Found!</p>
+      </div>
+    )
+  }
 
+  const indexOfLastRecipe = currentPage * recipesPerPage; //ÚLTIMO ÍNDICE DE LA PÁGINA ACTUAL 
+  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage; //PRIMER ÍNDICE DE LA PÁGINA ACTUAL
+  const currentRecipes = pageFiltereds.slice(indexOfFirstRecipe, indexOfLastRecipe); //NUEVO ARRAY CON LAS PÁGINAS
+  
   return (
     <div>
       <div className={styles.containerPrevNext}>

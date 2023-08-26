@@ -41,14 +41,12 @@ export const Filters = () => {
         const order = e.target.value;
         setAlphabeticalOrder(order);
         dispatch(sortAlphabetically(order));
-        dispatch(applyFilters("filteredSortByAlpha"))
     };
 
     const handleHealthScoreChange = (e) => {
         const order = e.target.value;
         setHealthScoreOrder(order);
         dispatch(sortScortHS(order));
-        dispatch(applyFilters("filteredSortByScoreH"))
     };
 
     const handleSelectDiet = (e) => {

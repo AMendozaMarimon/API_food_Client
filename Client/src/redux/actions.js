@@ -13,10 +13,7 @@ export const addRecipes = () => {
   const enpoind = "http://localhost:3001/recipes";
   return async (dispatch) => {
     try {
-      const { data, status } = await axios(enpoind);
-      if (status === 500) {
-        return window.alert(data.error)
-      }
+      const { data } = await axios(enpoind);
       return dispatch({
         type: ADD_RECIPES,
         payload: data,

@@ -17,6 +17,26 @@
   gap: 460px;
 }
 
+.containerNF{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.NFimg {
+  margin-top: 10px;
+  width: 300px;
+  height: auto;
+}
+
+.NFp {
+  font-family: 'League Spartan', sans-serif;        
+  font-size: 25px;
+  margin: 0;
+  color: #FBC030;
+}
+
 .button {
   margin-left: 30PX;
   margin-right: 30px;

@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
+import { addDiets, addRecipes } from "../../redux/actions";
+import styles from "./CreateRecipe.module.css";
+import Swal from 'sweetalert2';
+import PHOTO from "../Login/PHOTO_LOGIN.png";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import PHOTO from "../Login/PHOTO_LOGIN.png";
-// import GIF from "../RecipesCards/icons8-loading-infinity.gif";
-import styles from "./CreateRecipe.module.css";
-import { addDiets, addRecipes } from "../../redux/actions";
 
 export const CreateRecipe = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const myDiets = useSelector((state) => state.myDiets);
 
-    useEffect(() => {
+    useEffect(() => { //SI DIETA ES UNDEFINE SE SOLICITA LAS DIETAS
         if (!myDiets) {
             dispatch(addDiets());
         }
@@ -32,13 +32,13 @@ export const CreateRecipe = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
 
-        if (name === 'healthScore') {
+        if (name === 'healthScore') { //LÍMITA EL PUNTAJE PARA SOLO VALORES PERMITIDOS
             if (value < 0 || value > 100) {
                 return;
             }
         }
 
-        setFormData((prevFormData) => ({
+        setFormData((prevFormData) => ({ //SE GUARDAN LOS VALORES DEL FORM EN EL ESTADO L.
             ...prevFormData,
             [name]: value,
         }));
@@ -48,12 +48,12 @@ export const CreateRecipe = () => {
         const { value, checked } = e.target;
 
         if (checked) {
-            setFormData((prevFormData) => ({
+            setFormData((prevFormData) => ({ //AÑADE LAS DIETAS SELECCIONADAS
                 ...prevFormData,
                 selectedDiets: [...prevFormData.selectedDiets, value],
             }));
         } else {
-            setFormData((prevFormData) => ({
+            setFormData((prevFormData) => ({ //ELIMINA LAS DIETAS DESELECCIONADAS
                 ...prevFormData,
                 selectedDiets: prevFormData.selectedDiets.filter((diet) => diet !== value),
             }));
@@ -67,14 +67,21 @@ export const CreateRecipe = () => {
             const { status } = await axios.post(URL, formData);
             if (status === 200) {
                 await dispatch(addRecipes());
-                alert("Recipe created");
-                navigate("/search");
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Created Recipe',    
+                    showDenyButton: false,
+                    showCancelButton: false,
+                    confirmButtonText: 'Acept',
+                }).then((result) => {
+                    result.isConfirmed ? navigate("/search") : null;
+                });
             }
         } catch (error) {
             if (error.response) {
                 const { data, status } = error.response;
                 if (status === 400) {
-                    alert(data.message);
+                    Swal.fire(data.message, 'Remember to fill all the steps', 'error');
                 }
             }
         }
@@ -135,7 +142,7 @@ export const CreateRecipe = () => {
                                     <input
                                         type="checkbox"
                                         value={diet}
-                                        checked={formData.selectedDiets.includes(diet)}
+                                        checked={formData.selectedDiets.includes(diet)} //REFLEJA VISUALMENTE SI YA SE ENCUENTRA EN EL ESTADO
                                         onChange={handleCheckboxChange}
                                         className={styles.checkboxInput}
                                     />

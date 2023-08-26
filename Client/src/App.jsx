@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import { RecipesCards } from "./components/RecipesCards/RecipesCards";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Swal from 'sweetalert2';
 
 function App() {
 
@@ -28,15 +29,13 @@ function App() {
     } catch (error) {
       if (error.response) {
         const { status, data } = error.response;
+        let options = {
+          icon: 'error',
+          title: data.message
+        }
 
-        if (status === 500) {
-          alert(data.message)
-        } else if (status === 494) {
-          alert(data.message)
-        } else if (status === 403) {
-          alert(data.message)
-        } else if (status === 400) {
-          alert(data.message)
+        if (status === 500 || status === 494 || status === 403 || status === 400) {
+          Swal.fire(options)
         }
       }
     }
@@ -59,7 +58,7 @@ function App() {
       const { access } = data;
 
       if (status === 200) {
-        alert('Registered user!');
+        Swal.fire('¡Registered User!', 'Your registration was successful', 'success');
 
         if (access) {
           setAccess(access);
@@ -69,15 +68,13 @@ function App() {
     } catch (error) {
       if (error.response) {
         const { status, data } = error.response;
-
-        if (status === 400) {
-          alert(data.message);
-        } else if (status === 409) {
-          alert(data.message);
-        } else if (status === 500) {
-          alert(data.message)
-        } else if (status === 404) {
-          alert(data.message)
+        let options = {
+          icon: 'error',
+          title: data.message,
+        };
+    
+        if (status === 400 || status === 409 || status === 500 || status === 404) {
+          Swal.fire(options);
         }
       }
     }
